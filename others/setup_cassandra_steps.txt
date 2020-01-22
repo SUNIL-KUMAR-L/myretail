@@ -1,0 +1,40 @@
+CREATE KEYSPACE myretail
+  WITH REPLICATION = { 
+   'class' : 'SimpleStrategy', 
+   'replication_factor' : 1 
+  };
+
+CREATE TABLE product_price (
+    product_id text,
+    product_price text,
+    currency_code text,
+    created_datetime timestamp,
+    updated_datetime timestamp,
+    PRIMARY KEY((product_id))
+);
+
+
+## insert price records into myretail.product_price table
+# product available : 13860428, 54643166, 53741618, 53536794 ,76544201
+
+cqlsh:myretail>
+
+insert into product_price (product_id, created_datetime, currency_code, product_price, updated_datetime) values ('13860428', toUnixTimestamp(now()), 'USD', '15.99', toUnixTimestamp(now()));
+insert into product_price (product_id, created_datetime, currency_code, product_price, updated_datetime) values ('54643166', toUnixTimestamp(now()), 'USD', '59.65', toUnixTimestamp(now()));
+insert into product_price (product_id, created_datetime, currency_code, product_price, updated_datetime) values ('53741618', toUnixTimestamp(now()), 'USD', '199.99', toUnixTimestamp(now()));
+insert into product_price (product_id, created_datetime, currency_code, product_price, updated_datetime) values ('53536794', toUnixTimestamp(now()), 'USD', '219.99', toUnixTimestamp(now()));
+insert into product_price (product_id, created_datetime, currency_code, product_price, updated_datetime) values ('76544201', toUnixTimestamp(now()), 'USD', '69.99', toUnixTimestamp(now()));
+
+sample rows 
+cqlsh:myretail> select * from product_price;
+
+ product_id | created_datetime                | currency_code | product_price | updated_datetime
+------------+---------------------------------+---------------+---------------+---------------------------------
+   76544201 | 2020-01-22 03:16:41.796000+0000 |           USD |         69.99 | 2020-01-22 03:16:41.796000+0000
+   54643166 | 2020-01-22 03:16:41.788000+0000 |           USD |         59.65 | 2020-01-22 03:16:41.788000+0000
+   53741618 | 2020-01-22 03:16:41.791000+0000 |           USD |        199.99 | 2020-01-22 03:16:41.791000+0000
+   53536794 | 2020-01-22 03:16:41.794000+0000 |           USD |        219.99 | 2020-01-22 03:16:41.794000+0000
+   13860428 | 2020-01-22 03:16:41.778000+0000 |           USD |         15.99 | 2020-01-22 03:16:41.778000+0000
+
+
+(5 rows)

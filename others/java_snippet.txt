@@ -1,0 +1,51 @@
+   ########################################
+        rx java : compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.1.9'
+
+        Observable<RedSky> redSkyObservable = Observable.fromCallable(() -> redSkyService.getProductDetails(productId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.single());
+
+        Observable<Price> priceObservable = Observable.fromCallable(() -> priceService.getPrice(productId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.single());
+
+        Product product = Observable.zip(redSkyObservable, priceObservable, ConvertorUtil::buildProduct).blockingFirst();
+        return product;
+   ########################################
+
+  ########################################
+    CompletableFuture
+
+    CompletableFuture<RedSky> completableFutureRedSky = new CompletableFuture().supplyAsync(
+                    new Supplier<RedSky>() {
+                        @Override
+                        public RedSky get() {
+                            return redSkyService.getProductDetails(productId);
+                        }
+                    });
+
+            CompletableFuture<Price> completableFuturePrice = new CompletableFuture().supplyAsync(
+                    new Supplier<Price>() {
+                        @Override
+                        public Price get() {
+                            return priceService.getPrice(productId);
+                        }
+                    });
+
+            RedSky redSky = null;
+            try {
+                redSky = completableFutureRedSky.get();
+            } catch (Exception exp){
+                throw new RuntimeException(exp);
+            }
+
+            Price price = null;
+            try {
+                price = completableFuturePrice.get();
+            } catch (Exception exp){
+                throw new RuntimeException(exp);
+            }
+
+            return  ConvertorUtil.buildProduct(redSky, price);
+
+  ########################################

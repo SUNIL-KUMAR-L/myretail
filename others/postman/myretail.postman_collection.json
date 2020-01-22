@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "0065172e-47e6-4c3c-8062-c35e3de2b340",
+		"name": "myretail",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get  product price data by TCIN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/{{product_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"{{product_id}}"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "get - 13860428  - The Big Lebowski (Blu-ray)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/13860428",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"13860428"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "get - 54643166  - Instant Pot Duo Nova 6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/54643166",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"54643166"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "get - 53741618  - iRobot Roomba",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/53741618",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"53741618"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "get - 53536794  - Keurig K-Cafe Special Edition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/53536794",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"53536794"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "get - 76544201  - Air Fryer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/76544201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"76544201"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "update price - 13860428",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"id\": \"13860428\",\n    \"current_price\": {\n        \"value\": \"13.99\",\n        \"currency_code\": \"USD\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/13860428",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"13860428"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get - 13860428  - The Big Lebowski (Blu-ray)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/13860428",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"13860428"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "update price - 54643166",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"id\": \"54643166\",\n    \"current_price\": {\n        \"value\": \"99.99\",\n        \"currency_code\": \"USD\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/54643166",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"54643166"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get - 54643166  - Instant Pot Duo Nova 6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/54643166",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"54643166"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "update price - 53741618",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"id\": \"53741618\",\n    \"current_price\": {\n        \"value\": \"221.99\",\n        \"currency_code\": \"USD\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/53741618",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"53741618"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get - 53741618  - iRobot Roomba",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/53741618",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"53741618"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "update price - 53536794",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"id\": \"53536794\",\n    \"current_price\": {\n        \"value\": \"199.99\",\n        \"currency_code\": \"USD\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/53536794",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"53536794"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get - 53536794  - Keurig K-Cafe Special Edition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/53536794",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"53536794"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "update price - 76544201",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"id\": \"76544201\",\n    \"current_price\": {\n        \"value\": \"56.99\",\n        \"currency_code\": \"USD\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/76544201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"76544201"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get - 76544201  - Air Fryer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/products/76544201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"products",
+						"76544201"
+					]
+				},
+				"description": "product and its price details "
+			},
+			"response": []
+		},
+		{
+			"name": "myretail - v1 health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "myretail - v1  dbhealth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/myretail/v1/dbhealth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"myretail",
+						"v1",
+						"dbhealth"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

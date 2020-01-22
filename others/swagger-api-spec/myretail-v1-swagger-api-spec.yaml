@@ -1,0 +1,91 @@
+swagger: "2.0"
+info:
+  description: "MyRetail application would provide Product data along with Price info and options to update Product Price info"
+  version: "1.0.0"
+  title: "MyRetail Application"
+host: "localhost:8080"
+basePath: "/myretail/v1"
+tags:
+  - name: "products"
+    description: "get myretail products data"
+schemes:
+  - "http"
+paths:
+  /products/{productId}:
+    get:
+      tags:
+        - "products"
+      summary: "Fetch product data by productId"
+      description: "Returns a single product"
+      operationId: "getProductsById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "productId"
+          in: "path"
+          description: "Id of product"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Product"
+        400:
+          description: "Invalid productId supplied"
+        404:
+          description: "Product not found"
+        500:
+          description: "Internal server error"
+    put:
+      summary: "Updates a price of the product"
+      description: ""
+      operationId: "updateProductPrice"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "productId"
+          in: "path"
+          description: "Id of product's price to be updated"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "Product"
+          description: "Product price to be updated"
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Product"
+        400:
+          description: "Invalid Price supplied"
+        500:
+          description: "Internal server error"
+definitions:
+  Price:
+    type: "object"
+    properties:
+      value:
+        type: "string"
+      currency_code:
+        type: "string"
+    xml:
+      name: "Price"
+  Product:
+    type: "object"
+    required:
+      - "id"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      current_price:
+        $ref: "#/definitions/Price"
+    xml:
+      name: "Product"
