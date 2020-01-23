@@ -201,7 +201,7 @@ Product not found : 15117729, 16483589, 16696652, 16752456, 15643793
 
 import postman collection
 
-./others/postman/myretail-v1-postman_collection.json
+./others/postman/myretail.postman_collection.json
 
 open myretail postman collection 
 
@@ -222,14 +222,14 @@ Fetch product and price data for productId 1386042
 ####################################
 ```
 request :
-curl -X GET http://localhost:8080/myretail/v1/products/1386042
+curl -X GET http://localhost:8080/myretail/v1/products/13860428
 
 response: 
 {"id":"13860428","name":"The Big Lebowski (Blu-ray)","current_price":{"value":"15.99","currency_code":"USD"}}
 ```
 ####################################
 
-update product price for productId 1386042
+update product price for productId 13860428
 
 ####################################
 ```
@@ -250,12 +250,12 @@ response :
 ```
 ####################################
 
-GET product and price data for productId 1386042 after price update
+GET product and price data for productId 13860428 after price update
 
 ####################################
 ```
 request :
-curl -X GET http://localhost:8080/myretail/v1/products/1386042
+curl -X GET http://localhost:8080/myretail/v1/products/13860428
 
 response: 
 {"id":"13860428","name":"The Big Lebowski (Blu-ray)","current_price":{"value":"13.99","currency_code":"USD"}}
