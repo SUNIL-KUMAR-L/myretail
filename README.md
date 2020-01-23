@@ -1,11 +1,11 @@
-####
 
-My Retail web application exposes api to 
+# My Retail web application
+provides api to 
 * get product details with price info for a given product-id
 * update price info for a given product-id
 
-####
-tech stack
+##tech stack
+
 * java 11
 * spring boot 2.*
 * cassandra 3.11.3
