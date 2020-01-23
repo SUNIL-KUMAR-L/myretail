@@ -4,7 +4,7 @@ provides api to
 * get product details with price info for a given product-id
 * update price info for a given product-id
 
-##tech stack
+## tech stack
 
 * java 11
 * spring boot 2.*
