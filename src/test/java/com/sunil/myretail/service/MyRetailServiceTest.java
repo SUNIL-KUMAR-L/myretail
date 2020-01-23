@@ -3,6 +3,7 @@ package com.sunil.myretail.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sunil.myretail.model.Product;
 import com.sunil.myretail.price.domain.Price;
+import com.sunil.myretail.price.exception.GetPriceException;
 import com.sunil.myretail.price.exception.PriceUpdateException;
 import com.sunil.myretail.price.service.PriceService;
 import com.sunil.myretail.redsky.domain.RedSky;
@@ -79,9 +80,9 @@ public class MyRetailServiceTest {
 
     @Test
     public void getProductFailedToGetPrice() {
-        when(redSkyService.getProductDetails("13860428")).thenReturn(redSky);
 
-        when(priceService.getPrice("13860428")).thenThrow(new PriceUpdateException("13860428", new RuntimeException("")));
+        when(redSkyService.getProductDetails("13860428")).thenReturn(redSky);
+        when(priceService.getPrice("13860428")).thenThrow(new GetPriceException("13860428", new RuntimeException("")));
 
         Product product =  classUnderTest.getProduct("13860428");
 
@@ -97,17 +98,24 @@ public class MyRetailServiceTest {
 
     @Test
     public void getProductThrowsException() {
+
         when(redSkyService.getProductDetails("13860428"))
                 .thenThrow(new RedSkyIntegrationProductNotFoundException("13860428", new RuntimeException("")));
         when(priceService.getPrice("13860428")).thenReturn(priceDomain);
-
+        boolean resultsInRedSkyIntegrationProductNotFoundException = false;
         try {
             classUnderTest.getProduct("13860428");
-        } catch (RedSkyIntegrationProductNotFoundException exp) {
+        } catch (Exception exp) {
+            final Throwable cause = exp.getCause();
+            if(cause instanceof RedSkyIntegrationProductNotFoundException) {
+                resultsInRedSkyIntegrationProductNotFoundException = true;
+                verify(redSkyService, times(1)).getProductDetails("13860428");
+            }
+        } finally {
             verify(redSkyService, times(1)).getProductDetails("13860428");
+            verify(priceService, times(1)).getPrice("13860428");
+            assertTrue(resultsInRedSkyIntegrationProductNotFoundException);
         }
-        verify(redSkyService, times(1)).getProductDetails("13860428");
-        verify(priceService, times(0)).getPrice("13860428");
     }
 
     @Test

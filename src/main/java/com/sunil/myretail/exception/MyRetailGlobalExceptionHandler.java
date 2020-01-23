@@ -44,7 +44,7 @@ public class MyRetailGlobalExceptionHandler {
 
     @ExceptionHandler(value
             = {RedSkyIntegrationClientErrorException.class, ValidationException.class})
-    protected ResponseEntity<Object> handleBadProductException(
+    protected ResponseEntity<MyRetailApiError> handleBadProductException(
             RuntimeException ex, HttpServletRequest request) {
 
         log.error("api_event=controller_error http_method={} api_path={} http_status={}",
@@ -55,7 +55,7 @@ public class MyRetailGlobalExceptionHandler {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<>(buildMyRetailApiError(ex, HttpStatus.BAD_REQUEST),
+        return new ResponseEntity<MyRetailApiError>(buildMyRetailApiError(ex, HttpStatus.BAD_REQUEST),
                 headers, HttpStatus.BAD_REQUEST);
 
     }
@@ -83,6 +83,21 @@ public class MyRetailGlobalExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<MyRetailApiError> defaultErrorHandler(Exception exception, HttpServletRequest request) {
+
+        if(exception instanceof java.util.concurrent.CompletionException) {
+            final Throwable cause = exception.getCause();
+            if(cause instanceof RedSkyIntegrationProductNotFoundException) {
+                return handleProductNotFoundException((RedSkyIntegrationProductNotFoundException)cause,request);
+            } else if (cause instanceof RedSkyIntegrationClientErrorException ||  cause instanceof ValidationException) {
+                return  handleBadProductException((RuntimeException) cause,request);
+            } else if ( cause instanceof RedSkyIntegrationServerErrorException ||
+                        cause instanceof PriceCreateException ||
+                        cause instanceof PriceUpdateException ||
+                        cause instanceof GetPriceException) {
+                return handleAppIntegrationException((RuntimeException) cause,request);
+            }
+        }
+
         RuntimeException unHandledException = new RuntimeException("Something went wrong...");
 
         logInternalServerError(log,

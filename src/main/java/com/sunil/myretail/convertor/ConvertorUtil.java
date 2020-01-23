@@ -31,14 +31,16 @@ public class ConvertorUtil {
 
         Product product = new Product();
 
-        Item redskyItem = redSky.getProduct().getItem();
+        if(redSky != null) {
+            Item redskyItem = redSky.getProduct().getItem();
 
-        product.setProductId(redskyItem.getTcin());
+            product.setProductId(redskyItem.getTcin());
 
-        if(null != redskyItem.getProductDescription()) {
-            String title = redskyItem.getProductDescription().getTitle();
-            if (null != title) {
-                product.setProductDescription(title);
+            if (null != redskyItem.getProductDescription()) {
+                String title = redskyItem.getProductDescription().getTitle();
+                if (null != title) {
+                    product.setProductDescription(title);
+                }
             }
         }
 
