@@ -30,7 +30,7 @@ public class MyRetailGlobalExceptionHandler {
     protected ResponseEntity<MyRetailApiError> handleProductNotFoundException(
             RuntimeException ex, HttpServletRequest request) {
 
-        log.error("api_event=controller_error http_method={} api_path={} http_status={}",
+        log.error("api_event=controller_error http_method={} api_path={} http_status={} exception_method=handleProductNotFoundException",
                 request.getMethod(),
                 request.getServletPath(),
                 HttpStatus.NOT_FOUND
@@ -47,7 +47,7 @@ public class MyRetailGlobalExceptionHandler {
     protected ResponseEntity<MyRetailApiError> handleBadProductException(
             RuntimeException ex, HttpServletRequest request) {
 
-        log.error("api_event=controller_error http_method={} api_path={} http_status={}",
+        log.error("api_event=controller_error http_method={} api_path={} http_status={} exception_method=handleBadProductException",
                 request.getMethod(),
                 request.getServletPath(),
                 HttpStatus.BAD_REQUEST
@@ -69,7 +69,7 @@ public class MyRetailGlobalExceptionHandler {
             RuntimeException ex, HttpServletRequest request) {
 
         logInternalServerError(log,
-                "api_event=controller_error http_method={} api_path={} http_status={} AppIntegrationException",
+                "api_event=controller_error http_method={} api_path={} http_status={} exception_method=handleAppIntegrationException",
                 request,
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 ex);
@@ -86,22 +86,24 @@ public class MyRetailGlobalExceptionHandler {
 
         if(exception instanceof java.util.concurrent.CompletionException) {
             final Throwable cause = exception.getCause();
-            if(cause instanceof RedSkyIntegrationProductNotFoundException) {
-                return handleProductNotFoundException((RedSkyIntegrationProductNotFoundException)cause,request);
-            } else if (cause instanceof RedSkyIntegrationClientErrorException ||  cause instanceof ValidationException) {
-                return  handleBadProductException((RuntimeException) cause,request);
-            } else if ( cause instanceof RedSkyIntegrationServerErrorException ||
+            if(cause != null) {
+                if (cause instanceof RedSkyIntegrationProductNotFoundException) {
+                    return handleProductNotFoundException((RedSkyIntegrationProductNotFoundException) cause, request);
+                } else if (cause instanceof RedSkyIntegrationClientErrorException || cause instanceof ValidationException) {
+                    return handleBadProductException((RuntimeException) cause, request);
+                } else if (cause instanceof RedSkyIntegrationServerErrorException ||
                         cause instanceof PriceCreateException ||
                         cause instanceof PriceUpdateException ||
                         cause instanceof GetPriceException) {
-                return handleAppIntegrationException((RuntimeException) cause,request);
+                    return handleAppIntegrationException((RuntimeException) cause, request);
+                }
             }
         }
 
         RuntimeException unHandledException = new RuntimeException("Something went wrong...");
 
         logInternalServerError(log,
-                "api_event=controller_error http_method={} api_path={} http_status={} defaultErrorHandler",
+                "api_event=controller_error http_method={} api_path={} http_status={} exception_method=defaultErrorHandler",
                 request,
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 exception);

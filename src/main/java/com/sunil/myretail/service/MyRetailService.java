@@ -46,6 +46,7 @@ public class MyRetailService {
                         log.error("exception --- " + exception.getMessage(), exception);
                         Throwable cause = exception.getCause();
                         if(cause != null) {
+                            log.error("exception --- cause " + cause.getMessage(), cause);
                             if (cause instanceof GetPriceException) {
                                 return ConvertorUtil.buildProduct(redSkyCompletableFuture.join(), new Price());
                             } else if (cause instanceof RedSkyIntegrationProductNotFoundException) {

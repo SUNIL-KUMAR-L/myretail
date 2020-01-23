@@ -36,7 +36,7 @@ public class MyRetailController {
     }
 
     @GetMapping(path = "/products/{productId}",
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> getProductPriceDetails(@PathVariable(name = "productId") String productId) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -52,7 +52,7 @@ public class MyRetailController {
     }
 
     @PutMapping(path = "/products/{productId}",
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> updateProductPrice(@PathVariable(name = "productId") String productId,
                                                            @RequestBody Product product) {
