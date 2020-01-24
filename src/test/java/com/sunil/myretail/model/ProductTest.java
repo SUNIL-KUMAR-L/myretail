@@ -1,10 +1,11 @@
 package com.sunil.myretail.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductTest {
 
@@ -13,7 +14,7 @@ public class ProductTest {
     private Price price = null;
 
 
-    @Before
+    @BeforeEach
     public void setup() {
         try {
             price = objectMapper.readValue(ProductTest.class.getClassLoader().getResourceAsStream("price.json"), Price.class);

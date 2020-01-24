@@ -10,6 +10,7 @@ provides api to
 * spring boot 2.*
 * cassandra 3.11.3
 * gradle 5.*
+* JUnit 5.*
 
 ##
 # Setup

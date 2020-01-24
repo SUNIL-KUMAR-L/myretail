@@ -10,14 +10,17 @@ import com.sunil.myretail.redsky.domain.RedSky;
 import com.sunil.myretail.redsky.domain.RedSkyTest;
 import com.sunil.myretail.redsky.exception.RedSkyIntegrationProductNotFoundException;
 import com.sunil.myretail.redsky.service.RedSkyService;
-import static  org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Date;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MyRetailServiceTest {
 
@@ -36,7 +39,7 @@ public class MyRetailServiceTest {
     com.sunil.myretail.price.domain.Price priceDomain;
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
@@ -131,7 +134,7 @@ public class MyRetailServiceTest {
         classUnderTest.updatePrice(priceModel, productId);
     }
 
-    @Test (expected = PriceUpdateException.class)
+    @Test
     public void updatePriceFailed() {
         com.sunil.myretail.model.Price priceModel = new com.sunil.myretail.model.Price();
         priceModel.setPriceValue("123.45");
@@ -141,6 +144,6 @@ public class MyRetailServiceTest {
 
         doThrow(new PriceUpdateException(productId, new RuntimeException(""))).when(priceService).updatePrice(priceModel, productId);
 
-        classUnderTest.updatePrice(priceModel, productId);
+        assertThrows(PriceUpdateException.class ,() -> classUnderTest.updatePrice(priceModel, productId));
     }
 }

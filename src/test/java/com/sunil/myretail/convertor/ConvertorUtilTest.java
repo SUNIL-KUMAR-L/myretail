@@ -6,10 +6,10 @@ import com.sunil.myretail.model.Product;
 import com.sunil.myretail.redsky.domain.RedSky;
 import com.sunil.myretail.redsky.domain.RedSkyTest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ConvertorUtilTest {
 
@@ -19,7 +19,7 @@ public class ConvertorUtilTest {
     com.sunil.myretail.price.domain.Price priceDomain;
     String productId;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 
         productId = "1234";

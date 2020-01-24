@@ -1,19 +1,19 @@
 package com.sunil.myretail.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 public class MyRetailApiErrorTest {
 
     MyRetailApiError classUnderTest;
 
-    @Before
+    @BeforeEach
     public void setup(){
 
     }

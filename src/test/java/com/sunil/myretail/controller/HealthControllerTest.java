@@ -7,20 +7,22 @@ import com.datastax.driver.core.exceptions.NoHostAvailableException;
 
 import com.sunil.myretail.cassandra.CassandraConfig;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.mockito.Mock;
 
 import static  org.mockito.Mockito.*;
-
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.http.ResponseEntity;
 
 import java.net.InetSocketAddress;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 public class HealthControllerTest {
 
@@ -38,8 +40,7 @@ public class HealthControllerTest {
     @Mock
     Row row;
 
-
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);

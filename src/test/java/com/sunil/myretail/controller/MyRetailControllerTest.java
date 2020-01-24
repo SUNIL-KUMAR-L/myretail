@@ -9,15 +9,16 @@ import com.sunil.myretail.model.Product;
 import com.sunil.myretail.redsky.exception.RedSkyIntegrationProductNotFoundException;
 import com.sunil.myretail.service.MyRetailService;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.mockito.ArgumentCaptor;
 
 import static  org.mockito.Mockito.*;
 
 import org.springframework.http.ResponseEntity;
-
-import static org.junit.Assert.*;
 
 public class MyRetailControllerTest {
 
@@ -30,7 +31,7 @@ public class MyRetailControllerTest {
 
     ObjectMapper mapper = new ObjectMapper();
 
-    @Before
+    @BeforeEach
     public void setup(){
 
         product = new Product();
@@ -69,12 +70,12 @@ public class MyRetailControllerTest {
         assertTrue(productResponseValue.contains("\"current_price\""));
     }
 
-    @Test(expected = RedSkyIntegrationProductNotFoundException.class)
+    @Test
     public void getProductPriceDetailsNotFound() {
 
         when(myRetailService.getProduct("1234"))
                 .thenThrow(new RedSkyIntegrationProductNotFoundException("1234", new RuntimeException()));
-        classUnderTest.getProductPriceDetails("1234");
+        assertThrows(RedSkyIntegrationProductNotFoundException.class, () -> classUnderTest.getProductPriceDetails("1234"));
     }
 
     @Test

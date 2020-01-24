@@ -7,8 +7,7 @@ import com.sunil.myretail.redsky.exception.RedSkyIntegrationClientErrorException
 import com.sunil.myretail.redsky.exception.RedSkyIntegrationException;
 import com.sunil.myretail.redsky.exception.RedSkyIntegrationProductNotFoundException;
 import com.sunil.myretail.redsky.exception.RedSkyIntegrationServerErrorException;
-import org.junit.Before;
-import org.junit.Test;
+
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
@@ -16,7 +15,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.*;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RedSkyDaoTest {
 
@@ -31,7 +33,7 @@ public class RedSkyDaoTest {
 
     RedSkyDao classUnderTest;
 
-    @Before
+    @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
@@ -68,12 +70,12 @@ public class RedSkyDaoTest {
         assertEquals("The Big Lebowski (Blu-ray)", redSkyResponse.getProduct().getItem().getProductDescription().getTitle());
     }
 
-    @Test(expected = RedSkyIntegrationProductNotFoundException.class)
+    @Test
     public void getProductNotFoundException() {
 
         when(restTemplate.getForObject(any(String.class), eq(RedSky.class))).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
 
-        RedSky redSkyResponse = classUnderTest.getProductDetails("13860428");
+        assertThrows(RedSkyIntegrationProductNotFoundException.class ,() -> classUnderTest.getProductDetails("13860428"));
 
         ArgumentCaptor<String> redskyUrlCaptor  = ArgumentCaptor.forClass(String.class);
 
@@ -84,12 +86,12 @@ public class RedSkyDaoTest {
 
     }
 
-    @Test(expected = RedSkyIntegrationClientErrorException.class)
+    @Test
     public void getProductIntegrationBadInputException() {
 
         when(restTemplate.getForObject(any(String.class), eq(RedSky.class))).thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
 
-        RedSky redSkyResponse = classUnderTest.getProductDetails("13860428");
+        assertThrows(RedSkyIntegrationClientErrorException.class ,() -> classUnderTest.getProductDetails("13860428"));
 
         ArgumentCaptor<String> redskyUrlCaptor  = ArgumentCaptor.forClass(String.class);
 
@@ -100,12 +102,12 @@ public class RedSkyDaoTest {
 
     }
 
-    @Test(expected = RedSkyIntegrationServerErrorException.class)
+    @Test
     public void getProductIntegrationException() {
 
         when(restTemplate.getForObject(any(String.class), eq(RedSky.class))).thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
 
-        RedSky redSkyResponse = classUnderTest.getProductDetails("13860428");
+        assertThrows(RedSkyIntegrationServerErrorException.class ,() -> classUnderTest.getProductDetails("13860428"));
 
         ArgumentCaptor<String> redskyUrlCaptor  = ArgumentCaptor.forClass(String.class);
 
@@ -116,12 +118,12 @@ public class RedSkyDaoTest {
 
     }
 
-    @Test(expected = RedSkyIntegrationException.class)
+    @Test
     public void getProductIntegrationUnknownException() {
 
         when(restTemplate.getForObject(any(String.class), eq(RedSky.class))).thenThrow(new UnknownHttpStatusCodeException(111,"Unknown", null, null, null));
 
-        RedSky redSkyResponse = classUnderTest.getProductDetails("13860428");
+        assertThrows(RedSkyIntegrationException.class ,() -> classUnderTest.getProductDetails("13860428"));
 
         ArgumentCaptor<String> redskyUrlCaptor  = ArgumentCaptor.forClass(String.class);
 

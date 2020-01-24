@@ -10,14 +10,16 @@ import static org.mockito.Mockito.*;
 import com.sunil.myretail.price.domain.Price;
 import com.sunil.myretail.price.exception.GetPriceException;
 import com.sunil.myretail.price.exception.PriceCreateException;
-import org.junit.Before;
-import org.junit.Test;
+
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PriceDaoCassandraTest {
 
@@ -40,7 +42,7 @@ public class PriceDaoCassandraTest {
     @Mock
     Cluster cluster;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 

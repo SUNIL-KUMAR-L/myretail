@@ -36,8 +36,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	compile group: 'com.squareup.okhttp3',name: 'okhttp', version: '3.7.0'
-	
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 
 	implementation("com.datastax.cassandra:cassandra-driver-core:3.5.1")
 	implementation("com.datastax.cassandra:cassandra-driver-mapping:3.5.1")

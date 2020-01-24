@@ -2,8 +2,7 @@ package com.sunil.myretail.price.service;
 
 import com.sunil.myretail.price.dao.PriceDao;
 import com.sunil.myretail.price.exception.PriceUpdateException;
-import org.junit.Before;
-import org.junit.Test;
+
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
@@ -14,7 +13,10 @@ import com.sunil.myretail.model.Price;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PriceServiceTest {
 
@@ -22,7 +24,7 @@ public class PriceServiceTest {
     @Mock
     PriceDao priceDao;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         classUnderTest = new PriceService(priceDao);
@@ -64,7 +66,7 @@ public class PriceServiceTest {
         classUnderTest.updatePrice(price, productId);
     }
 
-    @Test(expected = PriceUpdateException.class)
+    @Test
     public void updatePriceThrowsException() {
         Price price = new Price();
         price.setCurrencyCode("USD");
@@ -73,7 +75,7 @@ public class PriceServiceTest {
 
         doThrow(new PriceUpdateException("1234" , new RuntimeException(""))).when(priceDao).updatePrice(any(com.sunil.myretail.price.domain.Price.class));
 
-        classUnderTest.updatePrice(price, productId);
+        assertThrows(PriceUpdateException.class, () -> classUnderTest.updatePrice(price, productId));
     }
 
     @Test

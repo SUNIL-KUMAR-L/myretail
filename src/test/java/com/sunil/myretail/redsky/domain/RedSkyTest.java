@@ -1,10 +1,11 @@
 package com.sunil.myretail.redsky.domain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RedSkyTest {
 
@@ -12,7 +13,7 @@ public class RedSkyTest {
 
     private RedSky redSky;
 
-    @Before
+    @BeforeEach
     public void setup() {
         try {
             redSky = objectMapper.readValue(RedSkyTest.class.

@@ -2,18 +2,20 @@ package com.sunil.myretail.exception;
 
 import com.sunil.myretail.price.exception.PriceUpdateException;
 import com.sunil.myretail.redsky.exception.RedSkyIntegrationProductNotFoundException;
-import org.junit.Before;
-import org.junit.Test;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MyRetailGlobalExceptionHandlerTest {
 
     MyRetailGlobalExceptionHandler classUnderTest;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         classUnderTest = new MyRetailGlobalExceptionHandler();
     }

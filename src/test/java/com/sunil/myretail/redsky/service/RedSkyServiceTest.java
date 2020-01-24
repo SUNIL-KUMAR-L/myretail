@@ -4,13 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sunil.myretail.redsky.dao.RedSkyDao;
 import com.sunil.myretail.redsky.domain.RedSky;
 import com.sunil.myretail.redsky.domain.RedSkyTest;
-import org.junit.Before;
-import org.junit.Test;
+
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RedSkyServiceTest {
 
@@ -23,7 +25,7 @@ public class RedSkyServiceTest {
     @Mock
     RedSkyDao redSkyDao;
 
-    @Before
+    @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
         try {

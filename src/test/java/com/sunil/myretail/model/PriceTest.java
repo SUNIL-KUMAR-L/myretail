@@ -1,10 +1,10 @@
 package com.sunil.myretail.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PriceTest {
 
